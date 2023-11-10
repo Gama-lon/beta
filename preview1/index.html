@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Now</title>
+    <title>TEAM X 1337</title>
     <style>
         body {
             margin: 0;
@@ -27,44 +27,38 @@
         #fullImageView img {
             max-width: 100%;
             max-height: 100%;
-            border-radius: 5px; 
+            border-radius: 5px; /* Tiny radius for the image */
         }
 
         #buyNowButton {
             position: fixed;
-            top: 0;
-            width: 100%;
-            text-align: center;
+            top: 10px;
+            left: 10px;
             padding: 10px;
             background-color: #3498db; /* Button background color */
-            color: #fff; 
-            z-index: 1000;
+            color: #fff; /* Button text color */
+            border: none;
+            border-radius: 20px; /* Rounded borders for the button */
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Animation for the button */
+        }
+
+        #buyNowButton:hover {
+            background-color: #2980b9; /* Change background color on hover */
         }
     </style>
 </head>
 <body>
 
 <div id="fullImageView">
-    <img src="S1.jpg" alt="TEAM X 1337">
+    <img src="your_image_url.jpg" alt="Full Screen Image">
 </div>
 
 <div id="buyNowButton">
     <a href="https://t.me/TEAM_X_1337_ADMIN" target="_blank" style="color: #fff; text-decoration: none;">Buy Now</a>
 </div>
 
-<!-- TEAM X 1337 -->
-
-<script>
-    
-    document.getElementById('buyNowButton').addEventListener('click', function () {
-        document.getElementById('fullImageView').style.display = 'flex';
-    });
-
-    document.getElementById('fullImageView').addEventListener('click', function () {
-        document.getElementById('fullImageView').style.display = 'none';
-    });
-</script>
+<!-- Add your content here -->
 
 </body>
 </html>
-
